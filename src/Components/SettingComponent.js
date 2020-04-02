@@ -23,26 +23,49 @@ class SettingComponent extends Component{
         const getBudget = async () =>{
             axios.get(`${this.state.url}/setting/budget`)
             .then(result => {
-                console.log(result.data[0]);
-                this.setState({
-                    budget : result.data[0].totalBudget,
-                    item : result.data[0].category
-                })
+                console.log(result.data)
+                if(result.data[0] !== undefined){ 
+                    console.log(result.data[0].totalBudget  )
+                    if(result.data[0].totalBudget !== null && result.data[0].totalBudget !== undefined){
+                        this.setState({
+                            budget : result.data[0].totalBudget
+                        })
+                    }
+                    else{
+                        alert('Please fill in the total budget')
+                    }
+                    if(result.data[0].category.length){
+                        this.setState({
+                            item : result.data[0].category
+                        })
+                    }
+                    else{
+                        alert('Please fill in a category');
+                    }
+                }
+                else{
+                    alert('Please fill the total budget and assign one category')
+                }
             })
         }
 
         getBudget();
     }
 
-    // update the budget
+    // update the budget and add
     updateBudget = async() => {
-        console.log(this.state.budget);
+        
 
         await axios.post(`${this.state.url}/setting/add/budget`, {
             "totalBudget" : this.state.budget
         })
         .then(result => {
-            console.log(result)
+            if(result.data.success === 'success'){
+                alert(`Total budget updated to ${this.state.budget}`)
+            }
+            else{
+                alert('Operation failed please try again');
+            }
         })
 
     }
@@ -69,7 +92,12 @@ class SettingComponent extends Component{
             flag = 0
             alert('The category is already present')
         }
+        if(this.state.category === ""){
+            flag = 0
+            alert('The category can not be empty');
+        }
         if(flag){
+            console.log(this.state.category)
             axios.post(`${this.state.url}/setting/category`,{
                 "category" : this.state.category
             })
