@@ -23,7 +23,6 @@ class SettingComponent extends Component{
         const getBudget = async () =>{
             axios.get(`${this.state.url}/setting/budget`)
             .then(result => {
-                console.log(result.data)
                 if(result.data[0] !== undefined){ 
                     console.log(result.data[0].totalBudget  )
                     if(result.data[0].totalBudget !== null && result.data[0].totalBudget !== undefined){
@@ -51,6 +50,7 @@ class SettingComponent extends Component{
 
         getBudget();
     }
+
 
     // update the budget and add
     updateBudget = async() => {
@@ -97,7 +97,6 @@ class SettingComponent extends Component{
             alert('The category can not be empty');
         }
         if(flag){
-            console.log(this.state.category)
             axios.post(`${this.state.url}/setting/category`,{
                 "category" : this.state.category
             })
@@ -108,7 +107,6 @@ class SettingComponent extends Component{
                     this.setState({
                         item : newCat
                     })
-                    console.log(this.state.item)
                 }
                 else if(result.data.success === 'failure'){
                     alert('Operation failed', result.data)
@@ -133,8 +131,6 @@ class SettingComponent extends Component{
             else{
                 console.log('failed')
             }
-            console.log(this.state.item);
-            console.log(result)
         })
     }
 
@@ -146,7 +142,9 @@ class SettingComponent extends Component{
                             Total Budget
                         </div>
                         <div className = 'col-sm-4'>
-                            <Input type="number" name='budget' value={this.state.budget || ''} onChange={this.handleBudgetChange} ></Input>
+                            <Input type="number" name='budget' value={this.state.budget || ''} 
+                                onChange={this.handleBudgetChange}>
+                            </Input>
                         </div>
                         <div className = 'col-sm-4'>
                             <Button outline color='success' onClick={this.updateBudget} >Update</Button>

@@ -15,10 +15,10 @@ class HomeComponent extends Component {
             category : [],
             totalBudget : '',
             redirect : false,
-            url : 'http://localhost:9000'
+            url : 'http://localhost:9000',
+            data : []
         }
     }
-
 
     async componentDidMount() {
         // get stuff from server
@@ -45,7 +45,10 @@ class HomeComponent extends Component {
                 redirect : true
             })
         }
+        else{
 
+        }
+        
         
     }
 
@@ -73,7 +76,7 @@ class HomeComponent extends Component {
             expense : newExpense
         })
     };
-
+    
     
 
     render() {
@@ -110,7 +113,7 @@ class HomeComponent extends Component {
             {   
                 this.state.expense.map((name, index) => {
                     return (
-                        <div className='row mb-1' key={index} style={{backgroundColor : "lightgreen"}} >
+                        <div className='row mb-1' key={index}   >
                             <div className='col'>
                                 <IconButton onClick={() => <AddExpenseModal/>} >
                                     <EditIcon fontSize = 'small'/>
@@ -145,7 +148,7 @@ class HomeComponent extends Component {
     // return method
         return (
             <div className='container'>
-                <ChartComponent/>
+                <ChartComponent props={this.state}/>
 
                 {/* call the modal for add */}
                 <AddExpenseModal  cat = {this.state.category} updateState={this.addToState}/>
@@ -185,9 +188,8 @@ const AddExpenseModal = (props) => {
     var [date, setDate] = useState(todayDate)
 
 
-    // const defaultDate = todayDate;
     
-
+    
     const addExpense = async (e) => {
         console.log(props.cat[0])
         e.preventDefault()
