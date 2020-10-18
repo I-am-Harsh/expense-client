@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Features
+* CRD operations
+* Graphical Representation
+
+## How to Run 
+1. Clone this repo.
+2. Run ```npm install```
+3. Run ```npm start```
+4. Clone the expense-server repo
+5. Repeat steps 2 and 3.
+
 ## Available Scripts
 
 In the project directory, you can run:
