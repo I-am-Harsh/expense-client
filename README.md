@@ -3,6 +3,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Features
 * CRD operations
 * Graphical Representation
+  * Category wise graph
+* Add Expenses to categories
+* Create any number of category
 
 ## How to Run 
 1. Clone this repo.
